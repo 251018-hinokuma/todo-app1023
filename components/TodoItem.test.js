@@ -26,3 +26,10 @@ test('完了済みならチェックがオンで、打ち消し線が付く', ()
   expect(screen.getByRole('checkbox', { name: '牛乳を買う' })).toBeChecked()
   expect(screen.getByText('牛乳を買う')).toHaveStyle({ textDecoration: 'line-through' })
 })
+
+test('未完了なら打ち消し線は付かない', () => {
+  const todo = { id: '1', text: '牛乳を買う', done: false }
+  render(<TodoItem todo={todo} onToggle={() => {}} onDelete={() => {}} />)
+  expect(screen.getByText('牛乳を買う')).toHaveStyle({ textDecoration: 'none' })
+})
+
